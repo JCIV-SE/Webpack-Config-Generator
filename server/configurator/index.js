@@ -2,16 +2,11 @@ const fs = require('fs');
 const path = require('path');
 const Form = require('../../data/db/models/form-schema');
 
-const {
-  buildExports,
-  buildScript,
-  listPackageImports
-} = require('./functions');
+const { buildExports, buildScript, listPackageImports } = require('./functions');
 
 function generateConfiguration(req, res, next) {
   if (req.body && req.body.answers) {
     const { answers } = req.body;
-    console.log(answers);
     // Build the object
     const configuration = {};
     configuration.moduleExports = buildExports(answers);
@@ -61,7 +56,6 @@ function generateFile(req, res, next) {
 
   fs.writeFile(filepath, startWithComment, 'utf8', err => {
     if (err) {
-      console.log({ err });
       res.status(418).end();
     } else {
       const stream = fs.createWriteStream(filepath, { flags: 'a' });
@@ -72,10 +66,7 @@ function generateFile(req, res, next) {
       stream.write(generateModuleText(configuration.moduleExports));
       stream.end();
       stream.on('close', () => {
-        res.setHeader(
-          'Content-disposition',
-          `attachment; filename="${filename}"`
-        );
+        res.setHeader('Content-disposition', `attachment; filename="${filename}"`);
         res.download(filepath, filename, err => {
           if (err) {
             res.status(418).end(err);

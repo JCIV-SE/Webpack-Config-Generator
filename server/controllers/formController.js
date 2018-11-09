@@ -10,21 +10,20 @@ const FormController = {
       3: req.body.answers[3]
     });
 
-    // console.log('before save, after create form');
-
-    newForm.save((err, answers) => {
-      res.locals.answers = answers;
-      next();
+    newForm.save(err => {
+      if (err) return err;
     });
-  },
 
-  findForm: (req, res, next) => {
-    // console.log('inside findForm controller method');
-    // console.log(req.body.answers)
-    // Form.findOne({ cookieID: req.body.answers.cookieID }, function(err, answers) {
-    //   res.locals.answers = answers;
-    // });
-    next();
+    Form.findOne({ cookieID: newForm.cookieID }, (err, thing) => {});
+
+    findForm: (req, res, next) => {
+      // console.log('inside findForm controller method');
+      // console.log(req.body.answers)
+      // Form.findOne({ cookieID: req.body.answers.cookieID }, function(err, answers) {
+      //   res.locals.answers = answers;
+      // });
+      next();
+    };
   }
 };
 
