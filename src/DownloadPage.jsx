@@ -9,16 +9,17 @@ class DownloadPage extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    // Note: Traditional AJAX requests won't open the necessary dialog box
     window.open('/api/configurator/download');
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Download Page</h3>
-        <input type="submit" value="Download Me!" />
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <h3>Download Page</h3>
+          <input type="submit" value="Download Me!" />
+        </form>
+      </div>
     );
   }
 }
