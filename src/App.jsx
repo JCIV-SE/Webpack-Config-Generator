@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader';
 
 // Route components
 import Signup from './Signup';
-import Form from './Form';
+import Form from './Form';t
 import DownloadPage from './DownloadPage';
 
 class App extends Component {
@@ -16,20 +16,20 @@ class App extends Component {
     };
 
     this.state = this.initialState;
-  }
+  }; 
 
   componentDidMount() {
     this.setCookie();
-  }
+  };
 
   setCookie() {
     fetch('/auth/set', { credentials: 'include' });
-  }
+  };
 
   render() {
     return (
       <div className="app">
-        <header className="header__homepage animate-slide-down">
+        <header className="header__homepage  sanimate-slide-down">
           <h1 className="h1__title animate-slide-up">
             Webpack Config Generator
           </h1>
